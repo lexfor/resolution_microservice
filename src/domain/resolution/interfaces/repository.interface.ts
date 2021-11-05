@@ -1,7 +1,10 @@
-import { Resolution } from './resolution.interface';
+import { ResolutionEntity } from '../entities/resolution.entity';
 
-export interface ResolutionRepository {
-  addResolution: (resolution: Resolution) => Promise<Resolution>;
-  getAllResolutions: (patientID: string) => Promise<Resolution[]>;
+export interface IResolutionRepository {
+  addResolution: (
+    resolutionEntity: ResolutionEntity,
+  ) => Promise<ResolutionEntity>;
+  getAllResolutions: (patientID: string) => Promise<ResolutionEntity[]>;
+  getResolutionByID: (resolutionID: string) => Promise<ResolutionEntity>;
   deleteResolution: (resolutionID: string) => Promise<string>;
 }

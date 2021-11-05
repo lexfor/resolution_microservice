@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package lab;
+
+service PatientService {
+  rpc GetPatientByUserID(getPatientByUserIDRequest) returns (getPatientByUserIDResponse) {}
+  rpc GetPatientByID(getPatientByIDRequest) returns (getPatientByIDResponse) {}
+}
+
+message getPatientByUserIDRequest {
+  string userID = 1;
+}
+
+message getPatientByUserIDResponse {
+  string id = 1;
+  string name = 2;
+  string birthday = 3;
+  string gender = 4;
+  string mail = 5;
+  string userID = 6;
+}
+
+message getPatientByIDRequest {
+  string userID = 1;
+}
+
+message getPatientByIDResponse {
+  string id = 1;
+  string name = 2;
+  string birthday = 3;
+  string gender = 4;
+  string mail = 5;
+  string userID = 6;
+}
+
+service DoctorService {
+  rpc GetDoctorByUserID(getDoctorByUserIDRequest) returns (getDoctorByUserIDResponse) {}
+}
+
+message getDoctorByUserIDRequest {
+  string userID = 1;
+}
+
+message getDoctorByUserIDResponse {
+  string id = 1;
+  string name = 2;
+  string specialization = 3;
+  string mail = 4;
+  string userID = 5;
+}
