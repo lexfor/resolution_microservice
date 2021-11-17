@@ -3,8 +3,10 @@ import { AppModule } from './app.module';
 import { MicroserviceOptions } from '@nestjs/microservices';
 import { grpcClientOptions } from './grpc-client.options';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { getParameter } from './infrastructure/getParameter';
 
 async function bootstrap() {
+  console.log(getParameter('DATABASE_URL'));
   const app = await NestFactory.create(AppModule);
   const config = new DocumentBuilder()
     .setTitle('Resolution microservice')
