@@ -83,6 +83,7 @@ export class ResolutionController implements OnModuleInit {
         userID: user,
       }),
     );
+    console.log(doctor);
     if (doctor.id === null) {
       throw new HttpException('doctor not exist', HttpStatus.BAD_REQUEST);
     }
