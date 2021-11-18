@@ -5,8 +5,8 @@ const ssmClient = new AWS.SSM({
   region: 'us-east-2',
 });
 
-export async function getParameter(name: string): Promise<string> {
-  const result = await ssmClient.getParameter(
+export async function getParameter(name: string): Promise<void> {
+  ssmClient.getParameter(
     {
       Name: name,
     },
@@ -17,5 +17,4 @@ export async function getParameter(name: string): Promise<string> {
       }
     },
   );
-  return '';
 }
