@@ -25,8 +25,8 @@ export class ResolutionEntity {
     patientID: string,
     doctorName: string,
     doctorSpecialization: string,
+    delay = 30000,
     id: string = uuidv1(),
-    delay: number = +process.env.TTL_DELAY,
     createdTime: string = new Date().toISOString(),
   ) {
     this.id = id;
@@ -44,6 +44,7 @@ export class ResolutionEntity {
       createResolutionDto.patient_id,
       createResolutionDto.doctor_name,
       createResolutionDto.doctor_specialization,
+      createResolutionDto.delay,
     );
   }
 

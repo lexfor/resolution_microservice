@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsUUID } from 'class-validator';
+import { IsNumber, IsString, IsUUID } from "class-validator";
 
 export class CreateResolutionDto {
   @ApiProperty()
@@ -14,4 +14,7 @@ export class CreateResolutionDto {
   @ApiProperty()
   @IsString()
   doctor_specialization: string;
+  @ApiProperty()
+  @IsNumber()
+  delay: number;
 }

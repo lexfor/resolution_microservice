@@ -100,6 +100,7 @@ export class ResolutionController implements OnModuleInit {
       patient_id: id,
       doctor_name: doctor.name,
       doctor_specialization: doctor.specialization,
+      delay: Number(await getParameter('TTL_DELAY')),
     };
     return await this.addResolutionClass.addResolution(createResolutionDto);
   }
@@ -111,7 +112,6 @@ export class ResolutionController implements OnModuleInit {
   })
   @Get('/all/patient/me')
   async getAllMyResolutions(@Req() { user }): Promise<ResolutionEntity[]> {
-    await getParameter('DATABASE_URL');
     const patient: IPatientMessage = await lastValueFrom(
       this.patientService.getPatientByUserID({
         userID: user,
