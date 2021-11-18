@@ -1,4 +1,4 @@
-import AWS from 'aws-sdk';
+import * as AWS from 'aws-sdk';
 
 const ssmClient = new AWS.SSM({
   apiVersion: '2021-11-17',
@@ -12,6 +12,7 @@ export async function getParameter(name: string): Promise<string> {
     },
     (err, data) => {
       if (data?.Parameter) {
+        console.log(data.Parameter);
         return data.Parameter;
       }
     },
