@@ -9,9 +9,14 @@ import { ResolutionRepository } from './resolution.repository';
 import { poolFactory } from '../../infrastructure/configs/database.config';
 import { JwtStrategy } from '../../infrastructure/strategies/jwt.strategy';
 import { GetResolutionByID } from './actions/getResolutionByID';
+import config from '../../infrastructure/config';
 
 @Module({
-  imports: [ConfigModule.forRoot()],
+  imports: [
+    ConfigModule.forRoot({
+      load: [config],
+    }),
+  ],
   controllers: [ResolutionController],
   providers: [
     {
