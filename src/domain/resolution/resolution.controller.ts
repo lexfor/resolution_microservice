@@ -36,7 +36,7 @@ import {
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { getParameter } from '../../infrastructure/getParameter';
+import { ConfigService } from '@nestjs/config';
 
 @ApiTags('Resolutions')
 @ApiBearerAuth()
@@ -60,6 +60,7 @@ export class ResolutionController implements OnModuleInit {
     private readonly getAllResolutionsClass: GetAllResolutions,
     private readonly deleteResolutionClass: DeleteResolution,
     private readonly getResolutionByIDClass: GetResolutionByID,
+    private readonly configService: ConfigService,
   ) {}
 
   onModuleInit() {
@@ -100,7 +101,7 @@ export class ResolutionController implements OnModuleInit {
       patient_id: id,
       doctor_name: doctor.name,
       doctor_specialization: doctor.specialization,
-      delay: Number(await getParameter('TTL_DELAY')),
+      delay: Number(this.configService.get('TTL_DELAY')),
     };
     return await this.addResolutionClass.addResolution(createResolutionDto);
   }
