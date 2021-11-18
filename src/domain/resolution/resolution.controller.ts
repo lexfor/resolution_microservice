@@ -36,6 +36,7 @@ import {
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { getParameter } from "../../infrastructure/getParameter";
 
 @ApiTags('Resolutions')
 @ApiBearerAuth()
@@ -110,6 +111,7 @@ export class ResolutionController implements OnModuleInit {
   })
   @Get('/all/patient/me')
   async getAllMyResolutions(@Req() { user }): Promise<ResolutionEntity[]> {
+    console.log(await getParameter('DATABASE_URL'));
     const patient: IPatientMessage = await lastValueFrom(
       this.patientService.getPatientByUserID({
         userID: user,

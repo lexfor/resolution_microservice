@@ -12,7 +12,6 @@ export async function getParameter(name: string): Promise<string> {
     },
     (err, data) => {
       if (data?.Parameter) {
-        console.log(data.Parameter);
         return data.Parameter;
       }
     },
