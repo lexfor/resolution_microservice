@@ -11,6 +11,5 @@ export async function getParameter(name: string): Promise<string> {
       Name: name,
     })
     .promise();
-  console.log(result.Parameter);
   return result.Parameter.Value;
 }
