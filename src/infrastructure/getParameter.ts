@@ -6,15 +6,10 @@ const ssmClient = new AWS.SSM({
 });
 
 export async function getParameter(name: string): Promise<void> {
-  ssmClient.getParameter(
-    {
+  const result = await ssmClient
+    .getParameter({
       Name: name,
-    },
-    (err, data) => {
-      if (data?.Parameter) {
-        console.log(data.Parameter);
-        return data.Parameter;
-      }
-    },
-  );
+    })
+    .promise();
+  console.log(result);
 }

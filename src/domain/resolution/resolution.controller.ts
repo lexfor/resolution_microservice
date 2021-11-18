@@ -36,7 +36,7 @@ import {
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { getParameter } from "../../infrastructure/getParameter";
+import { getParameter } from '../../infrastructure/getParameter';
 
 @ApiTags('Resolutions')
 @ApiBearerAuth()
