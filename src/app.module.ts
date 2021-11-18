@@ -6,10 +6,10 @@ import config from './infrastructure/config';
 
 @Module({
   imports: [
-    ResolutionModule,
     ConfigModule.forRoot({
       load: [config],
     }),
+    ResolutionModule,
   ],
   controllers: [GrpcController],
 })
