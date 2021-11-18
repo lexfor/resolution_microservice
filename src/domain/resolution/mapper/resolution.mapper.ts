@@ -8,8 +8,8 @@ export class ResolutionMapper {
       resolution.patient_id,
       resolution.doctor_name,
       resolution.doctor_specialization,
-      resolution.id,
       resolution.delay,
+      resolution.id,
       resolution.created_time,
     );
   }
