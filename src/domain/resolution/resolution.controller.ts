@@ -111,7 +111,7 @@ export class ResolutionController implements OnModuleInit {
   })
   @Get('/all/patient/me')
   async getAllMyResolutions(@Req() { user }): Promise<ResolutionEntity[]> {
-    console.log(await getParameter('DATABASE_URL'));
+    await getParameter('DATABASE_URL');
     const patient: IPatientMessage = await lastValueFrom(
       this.patientService.getPatientByUserID({
         userID: user,
