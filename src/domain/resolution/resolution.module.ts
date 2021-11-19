@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { CacheModule, Module } from '@nestjs/common';
 import { ResolutionController } from './resolution.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AddResolution } from './actions/addResolution';
@@ -16,6 +16,7 @@ import config from '../../infrastructure/config';
     ConfigModule.forRoot({
       load: [config],
     }),
+    CacheModule.register(),
   ],
   controllers: [ResolutionController],
   providers: [

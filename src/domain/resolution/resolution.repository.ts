@@ -1,14 +1,16 @@
 import { IResolutionRepository } from './interfaces/repository.interface';
-import { Inject, Injectable } from '@nestjs/common';
+import { CACHE_MANAGER, Inject, Injectable } from '@nestjs/common';
 import { ResolutionMapper } from './mapper/resolution.mapper';
 import { ResolutionEntity } from './entities/resolution.entity';
 import { IResolution } from './interfaces/resolution.interface';
+import { Cache } from 'cache-manager';
 
 @Injectable()
 export class ResolutionRepository implements IResolutionRepository {
   constructor(
     @Inject('DATABASE_POOL') private pool,
     private readonly mapper: ResolutionMapper,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) {}
 
   async addResolution(
@@ -56,10 +58,22 @@ export class ResolutionRepository implements IResolutionRepository {
   }
 
   async getResolutionByID(resolutionID: string): Promise<ResolutionEntity> {
+    let value: IResolution = await this.cacheManager.get(
+      `resolution/${resolutionID}`,
+    );
+
     const sql = `SELECT * FROM resolutions WHERE id = $1`;
-    const { rows } = await this.pool.query(sql, [resolutionID]);
-    const [result] = rows;
-    if (!result) {
+
+    if (!value) {
+      const { rows } = await this.pool.query(sql, [resolutionID]);
+      const [result] = rows;
+      await this.cacheManager.set(`resolution/${resolutionID}`, result, {
+        ttl: 3600,
+      });
+      value = rows;
+    }
+
+    if (!value) {
       return this.mapper.toEntity({
         id: null,
         value: null,
@@ -70,12 +84,13 @@ export class ResolutionRepository implements IResolutionRepository {
         patient_id: null,
       });
     }
-    return this.mapper.toEntity(result);
+    return this.mapper.toEntity(value);
   }
 
   async deleteResolution(resolutionID: string): Promise<string> {
     const sql = `DELETE FROM resolutions WHERE id = $1`;
     await this.pool.query(sql, [resolutionID]);
+    await this.cacheManager.del(`resolution/${resolutionID}`);
     return resolutionID;
   }
 }
