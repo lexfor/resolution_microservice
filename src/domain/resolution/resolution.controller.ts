@@ -61,7 +61,9 @@ export class ResolutionController implements OnModuleInit {
     private readonly deleteResolutionClass: DeleteResolution,
     private readonly getResolutionByIDClass: GetResolutionByID,
     private readonly configService: ConfigService,
-  ) {}
+  ) {
+    console.log(process.env.USERS_MICROSERVICE_GRPC);
+  }
 
   onModuleInit() {
     this.patientService =
