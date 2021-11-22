@@ -21,7 +21,7 @@ import { AddResolution } from './actions/addResolution';
 import { GetAllResolutions } from './actions/getAllResolutions';
 import { DeleteResolution } from './actions/deleteResolution';
 import { IDoctorService } from './interfaces/doctor.service.interface';
-import { Client, ClientGrpc, ClientGrpcProxy, Transport } from "@nestjs/microservices";
+import { Client, ClientGrpc, Transport } from '@nestjs/microservices';
 import { IPatientService } from './interfaces/patients.service.interface';
 import { JwtGuard } from '../../infrastructure/guards/jwt.guard';
 import { join } from 'path';
@@ -37,6 +37,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
+import { getParameter } from '../../infrastructure/getParameter';
 
 @ApiTags('Resolutions')
 @ApiBearerAuth()
@@ -46,7 +47,7 @@ export class ResolutionController implements OnModuleInit {
   @Client({
     transport: Transport.GRPC,
     options: {
-      url: process.env.USERS_MICROSERVICE_GRPC,
+      url: await getParameter('USERS_MICROSERVICE_GRPC'),
       package: 'lab',
       protoPath: join(__dirname, '../../../grpc/grpc.proto'),
     },
@@ -61,10 +62,7 @@ export class ResolutionController implements OnModuleInit {
     private readonly deleteResolutionClass: DeleteResolution,
     private readonly getResolutionByIDClass: GetResolutionByID,
     private readonly configService: ConfigService,
-  ) {
-    console.log(configService.get('USERS_MICROSERVICE_GRPC'));
-    console.log(process.env.USERS_MICROSERVICE_GRPC);
-  }
+  ) {}
 
   onModuleInit() {
     this.patientService =
