@@ -3,9 +3,12 @@ import { AppModule } from './app.module';
 import { MicroserviceOptions } from '@nestjs/microservices';
 import { grpcClientOptions } from './grpc-client.options';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { CustomLogger } from './infrastructure/CustomLogger';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger: new CustomLogger(),
+  });
   const config = new DocumentBuilder()
     .setTitle('Resolution microservice')
     .setDescription('Resolution microservice API')
