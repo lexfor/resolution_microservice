@@ -21,7 +21,7 @@ import { AddResolution } from './actions/addResolution';
 import { GetAllResolutions } from './actions/getAllResolutions';
 import { DeleteResolution } from './actions/deleteResolution';
 import { IDoctorService } from './interfaces/doctor.service.interface';
-import { Client, ClientGrpc, Transport } from '@nestjs/microservices';
+import { Client, ClientGrpc, ClientGrpcProxy, Transport } from "@nestjs/microservices";
 import { IPatientService } from './interfaces/patients.service.interface';
 import { JwtGuard } from '../../infrastructure/guards/jwt.guard';
 import { join } from 'path';
@@ -63,6 +63,7 @@ export class ResolutionController implements OnModuleInit {
     private readonly configService: ConfigService,
   ) {
     console.log(configService.get('USERS_MICROSERVICE_GRPC'));
+    console.log(process.env.USERS_MICROSERVICE_GRPC);
   }
 
   onModuleInit() {
