@@ -1,5 +1,8 @@
-import { IPatient } from './patient.interface';
+import { IUserIDMessage } from './userID-message.interface';
+import { IPatientMessage } from './patient-message.interface';
+import { Observable } from 'rxjs';
 
 export interface IPatientService {
-  getPatientByUserID(data: string): IPatient;
+  getPatientByUserID(data: IUserIDMessage): Observable<IPatientMessage>;
+  getPatientByID(data: IUserIDMessage): Observable<IPatientMessage>;
 }
