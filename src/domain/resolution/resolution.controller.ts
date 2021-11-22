@@ -37,7 +37,6 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
-import { getParameter } from '../../infrastructure/getParameter';
 
 @ApiTags('Resolutions')
 @ApiBearerAuth()
@@ -47,7 +46,7 @@ export class ResolutionController implements OnModuleInit {
   @Client({
     transport: Transport.GRPC,
     options: {
-      url: await getParameter('USERS_MICROSERVICE_GRPC'),
+      url: 'ec2-18-217-138-210.us-east-2.compute.amazonaws.com:3001',
       package: 'lab',
       protoPath: join(__dirname, '../../../grpc/grpc.proto'),
     },
