@@ -62,7 +62,7 @@ export class ResolutionController implements OnModuleInit {
     private readonly getResolutionByIDClass: GetResolutionByID,
     private readonly configService: ConfigService,
   ) {
-    console.log(process.env.USERS_MICROSERVICE_GRPC);
+    console.log(configService.get('USERS_MICROSERVICE_GRPC'));
   }
 
   onModuleInit() {
