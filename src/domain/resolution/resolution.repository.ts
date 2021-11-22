@@ -39,7 +39,7 @@ export class ResolutionRepository implements IResolutionRepository {
       resolution.doctor_specialization,
     ]);
     end();
-    this.logger.log(delay());
+    this.logger.log(`create resolution time: ${delay()}ms`);
     return resolutionEntity;
   }
 
@@ -48,7 +48,7 @@ export class ResolutionRepository implements IResolutionRepository {
     const sql = `SELECT * FROM resolutions WHERE patient_id = $1`;
     const { rows } = await this.pool.query(sql, [patientID]);
     end();
-    this.logger.log(delay());
+    this.logger.log(`get all resolutions time: ${delay()}ms`);
     return rows.map((row) => {
       if (!row) {
         return this.mapper.toEntity({
@@ -82,7 +82,7 @@ export class ResolutionRepository implements IResolutionRepository {
       value = rows;
     }
     end();
-    this.logger.log(delay());
+    this.logger.log(`get resolution by id time: ${delay()}ms`);
     if (!value) {
       return this.mapper.toEntity({
         id: null,
@@ -103,7 +103,7 @@ export class ResolutionRepository implements IResolutionRepository {
     await this.pool.query(sql, [resolutionID]);
     await this.cacheManager.del(`resolution/${resolutionID}`);
     end();
-    this.logger.log(delay());
+    this.logger.log(`delete resolution time: ${delay()}ms`);
     return resolutionID;
   }
 }
