@@ -4,9 +4,12 @@ import * as fs from 'fs';
 @Injectable()
 export class CustomLogger extends ConsoleLogger {
   private readonly fd: number;
-  constructor() {
+  constructor(name = 'Module') {
     super();
-    this.fd = fs.openSync(`./logs/StartDate:${new Date().toISOString()}`, 'a');
+    this.fd = fs.openSync(
+      `./logs/Source:${name}StartDate:${new Date().toISOString()}`,
+      'a',
+    );
   }
 
   log(message: any, ...optionalParams: any[]) {

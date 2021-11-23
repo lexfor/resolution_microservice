@@ -7,7 +7,7 @@ import { CustomLogger } from './infrastructure/logger/CustomLogger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
-    logger: new CustomLogger(),
+    logger: new CustomLogger('Application'),
   });
   const config = new DocumentBuilder()
     .setTitle('Resolution microservice')
