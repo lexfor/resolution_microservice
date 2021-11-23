@@ -5,12 +5,13 @@ import { ResolutionEntity } from './entities/resolution.entity';
 import { IResolution } from './interfaces/resolution.interface';
 import { Cache } from 'cache-manager';
 import { delay, end, start } from '../../infrastructure/timer';
+import { CustomLogger } from '../../infrastructure/CustomLogger';
 
 @Injectable()
 export class ResolutionRepository implements IResolutionRepository {
   constructor(
     @Inject('DATABASE_POOL') private pool,
-    private readonly logger = new Logger('Doctor repository'),
+    private readonly logger: CustomLogger,
     private readonly mapper: ResolutionMapper,
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) {}
