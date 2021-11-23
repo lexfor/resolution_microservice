@@ -7,12 +7,14 @@ export class CustomLogger implements LoggerService {
     this.fd = fs.openSync(`./logs/Start:${new Date().toISOString()}`, 'a');
   }
   log(message: any, ...optionalParams: any[]) {
+    console.log(`Logs: ${message}\n Module: ${optionalParams.toString()}\n`);
     fs.writeSync(
       this.fd,
-      `$Logs: ${message}\n Module: ${optionalParams.toString()}\n`,
+      `Logs: ${message}\n Module: ${optionalParams.toString()}\n`,
     );
   }
   error(message: any, ...optionalParams: any[]) {
+    console.log(`Error: ${message}\n Module: ${optionalParams.toString()}\n`);
     fs.writeSync(
       this.fd,
       `Error: ${message}\n Module: ${optionalParams.toString()}\n`,
