@@ -7,7 +7,7 @@ import { CustomLogger } from './infrastructure/logger/CustomLogger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.useLogger(new CustomLogger());
+  app.useLogger(app.get(CustomLogger));
   const config = new DocumentBuilder()
     .setTitle('Resolution microservice')
     .setDescription('Resolution microservice API')
