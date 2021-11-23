@@ -10,6 +10,7 @@ import { poolFactory } from '../../infrastructure/configs/database.config';
 import { JwtStrategy } from '../../infrastructure/strategies/jwt.strategy';
 import { GetResolutionByID } from './actions/getResolutionByID';
 import config from '../../infrastructure/config';
+import { LoggerModule } from '../../infrastructure/logger/logger.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import config from '../../infrastructure/config';
       load: [config],
     }),
     CacheModule.register(),
+    LoggerModule,
   ],
   controllers: [ResolutionController],
   providers: [

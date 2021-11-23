@@ -5,7 +5,7 @@ import { ResolutionEntity } from './entities/resolution.entity';
 import { IResolution } from './interfaces/resolution.interface';
 import { Cache } from 'cache-manager';
 import { delay, end, start } from '../../infrastructure/timer';
-import { CustomLogger } from '../../infrastructure/CustomLogger';
+import { CustomLogger } from '../../infrastructure/logger/CustomLogger';
 
 @Injectable()
 export class ResolutionRepository implements IResolutionRepository {
@@ -14,7 +14,9 @@ export class ResolutionRepository implements IResolutionRepository {
     private readonly logger: CustomLogger,
     private readonly mapper: ResolutionMapper,
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
-  ) {}
+  ) {
+    this.logger.setContext('Resolution repository');
+  }
 
   async addResolution(
     resolutionEntity: ResolutionEntity,
