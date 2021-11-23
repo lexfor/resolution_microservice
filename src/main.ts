@@ -6,8 +6,9 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { CustomLogger } from './infrastructure/logger/CustomLogger';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  app.useLogger(app.get(CustomLogger));
+  const app = await NestFactory.create(AppModule, {
+    logger: new CustomLogger(),
+  });
   const config = new DocumentBuilder()
     .setTitle('Resolution microservice')
     .setDescription('Resolution microservice API')

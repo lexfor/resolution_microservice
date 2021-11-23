@@ -6,7 +6,7 @@ export class CustomLogger extends ConsoleLogger {
   private readonly fd: number;
   constructor() {
     super();
-    this.fd = fs.openSync(`./logs/Start:${new Date().toISOString()}`, 'a');
+    this.fd = fs.openSync(`./logs/StartDate:${new Date().toISOString()}`, 'a');
   }
 
   log(message: any, ...optionalParams: any[]) {
