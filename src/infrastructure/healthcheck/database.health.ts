@@ -4,6 +4,7 @@ import {
   HealthIndicatorResult,
   HealthCheckError,
 } from '@nestjs/terminus';
+import { sendMessage } from '../sendMessage';
 
 @Injectable()
 export class DatabaseHealthIndicator extends HealthIndicator {
@@ -19,6 +20,7 @@ export class DatabaseHealthIndicator extends HealthIndicator {
     if (isHealthy) {
       return result;
     }
+    await sendMessage('database from resolution microservice not available');
     throw new HealthCheckError('database failed', result);
   }
 }
