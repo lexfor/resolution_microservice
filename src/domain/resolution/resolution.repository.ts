@@ -1,5 +1,5 @@
 import { IResolutionRepository } from './interfaces/repository.interface';
-import { CACHE_MANAGER, Inject, Injectable, Logger } from '@nestjs/common';
+import { CACHE_MANAGER, Inject, Injectable } from '@nestjs/common';
 import { ResolutionMapper } from './mapper/resolution.mapper';
 import { ResolutionEntity } from './entities/resolution.entity';
 import { IResolution } from './interfaces/resolution.interface';

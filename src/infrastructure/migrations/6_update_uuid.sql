@@ -1,0 +1,1 @@
+ALTER TABLE resolutions ALTER COLUMN id TYPE UUID USING id::uuid;
